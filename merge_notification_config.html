@@ -1,0 +1,76 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><head><title>Python: module merge_notification_config</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+</head><body bgcolor="#f0f0f8">
+
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="heading">
+<tr bgcolor="#7799ee">
+<td valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial">&nbsp;<br><big><big><strong>merge_notification_config</strong></big></big></font></td
+><td align=right valign=bottom
+><font color="#ffffff" face="helvetica, arial"><a href=".">index</a><br><a href="file:/Users/boroleh/projects/amz/move/operations/commons/AWS/dod/src/merge_notification_config.py">/Users/boroleh/projects/amz/move/operations/commons/AWS/dod/src/merge_notification_config.py</a></font></td></tr></table>
+    <p><tt>This&nbsp;utility&nbsp;helps&nbsp;to&nbsp;add&nbsp;a&nbsp;lambda&nbsp;notification&nbsp;or&nbsp;sns&nbsp;topic&nbsp;notification<br>
+to&nbsp;existing&nbsp;S3&nbsp;bucket.&nbsp;The&nbsp;regular&nbsp;put-bucket-notification-configuration&nbsp;api<br>
+overwrites&nbsp;any&nbsp;existing&nbsp;configurations.&nbsp;This&nbsp;utility&nbsp;helps&nbsp;to&nbsp;"APPEND"&nbsp;to&nbsp;an<br>
+existing&nbsp;configuration.<br>
+&nbsp;<br>
+&nbsp;&nbsp;description='Append&nbsp;s3&nbsp;bucket&nbsp;notification&nbsp;to&nbsp;sns&nbsp;topic')<br>
+&nbsp;&nbsp;parser.add_argument('-b',&nbsp;'--bucket',&nbsp;help='bucket&nbsp;name',&nbsp;required=True)<br>
+&nbsp;&nbsp;parser.add_argument('-k',&nbsp;'--key',&nbsp;help='prefix/key',&nbsp;required=True)<br>
+&nbsp;&nbsp;parser.add_argument('-t',&nbsp;'--topic-arn',<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;help='ARN&nbsp;of&nbsp;the&nbsp;topic&nbsp;to&nbsp;subscribe&nbsp;to')<br>
+&nbsp;&nbsp;parser.add_argument('-l',&nbsp;'--lambda-arn',<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;help='ARN&nbsp;of&nbsp;the&nbsp;Lambda&nbsp;Function&nbsp;to&nbsp;subscribe&nbsp;to')<br>
+&nbsp;&nbsp;parser.add_argument('-p',&nbsp;'--profile',<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;help='aws&nbsp;profile&nbsp;from&nbsp;config&nbsp;else&nbsp;default',<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;default='default')</tt></p>
+<p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#aa55cc">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Modules</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#aa55cc"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><table width="100%" summary="list"><tr><td width="25%" valign=top><a href="argparse.html">argparse</a><br>
+<a href="boto3.html">boto3</a><br>
+</td><td width="25%" valign=top><a href="copy.html">copy</a><br>
+<a href="json.html">json</a><br>
+</td><td width="25%" valign=top><a href="uuid.html">uuid</a><br>
+</td><td width="25%" valign=top></td></tr></table></td></tr></table><p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#eeaa77">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Functions</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#eeaa77"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><dl><dt><a name="-json_notification_config"><strong>json_notification_config</strong></a>(prefix, arn_type, arn)</dt><dd><tt>Creates&nbsp;a&nbsp;notification&nbsp;config&nbsp;JSON&nbsp;object&nbsp;for&nbsp;S3&nbsp;Object&nbsp;creation&nbsp;event<br>
+The&nbsp;config&nbsp;JSON&nbsp;object&nbsp;can&nbsp;be&nbsp;used&nbsp;for&nbsp;either&nbsp;sns&nbsp;topic&nbsp;or&nbsp;lambda&nbsp;function.<br>
+&nbsp;<br>
+Parameters<br>
+----------<br>
+prefix:&nbsp;&nbsp;&nbsp;Prefix&nbsp;to&nbsp;which&nbsp;the&nbsp;configuration&nbsp;should&nbsp;be&nbsp;applied&nbsp;to<br>
+arn_type:&nbsp;(TopicArn|LambdaFunctionArn)<br>
+arn:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The&nbsp;value&nbsp;of&nbsp;the&nbsp;TopicArn&nbsp;or&nbsp;LambdaFunctionArn<br>
+&nbsp;<br>
+Returns<br>
+-------<br>
+json:&nbsp;A&nbsp;JSON&nbsp;object&nbsp;representating&nbsp;the&nbsp;notification&nbsp;configuration.</tt></dd></dl>
+ <dl><dt><a name="-main"><strong>main</strong></a>()</dt></dl>
+ <dl><dt><a name="-merge_config"><strong>merge_config</strong></a>(arn, configuration_type, bucket, key, profile='default')</dt><dd><tt>Generates&nbsp;and&nbsp;merges&nbsp;Topic&nbsp;of&nbsp;LambdaFunction&nbsp;configuration&nbsp;with&nbsp;existing<br>
+S3&nbsp;bucket&nbsp;configuration&nbsp;of&nbsp;the&nbsp;same&nbsp;type.<br>
+&nbsp;<br>
+Parameters<br>
+----------<br>
+arn:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The&nbsp;ARN&nbsp;of&nbsp;SNS&nbsp;Topic&nbsp;or&nbsp;LambdaFunction&nbsp;that&nbsp;needs&nbsp;to&nbsp;be<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;notified&nbsp;on&nbsp;a&nbsp;S3&nbsp;event.<br>
+configuration_type:&nbsp;(Lambda|Topic)<br>
+bucket:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The&nbsp;bucket&nbsp;on&nbsp;which&nbsp;this&nbsp;configuration&nbsp;is&nbsp;APPENDED.<br>
+key:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Filter&nbsp;keys&nbsp;for&nbsp;notification&nbsp;within&nbsp;the&nbsp;bucket.<br>
+profile:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;AWS&nbsp;Credentials&nbsp;profile.<br>
+&nbsp;<br>
+Returns<br>
+-------<br>
+dict:&nbsp;existing&nbsp;config&nbsp;to&nbsp;save&nbsp;just&nbsp;in&nbsp;case&nbsp;this&nbsp;code&nbsp;fails.</tt></dd></dl>
+ <dl><dt><a name="-parse_arguments"><strong>parse_arguments</strong></a>()</dt></dl>
+</td></tr></table>
+</body></html>
