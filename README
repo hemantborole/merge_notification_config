@@ -1,0 +1,6 @@
+This utility helps to add a lambda notification or sns topic notification
+to existing S3 bucket. The regular put-bucket-notification-configuration api
+overwrites any existing configurations. This utility helps to "APPEND" to an
+existing notification configuration.
+
+pydoc: merge_notification_config.html
